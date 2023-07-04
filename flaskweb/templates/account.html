@@ -1,0 +1,5 @@
+{% extends "layout.html" %}  # Extends the base template called "layout.html"
+
+{% block content %}  # Defines a content block that can be overridden in child templates
+    <h1>{{ current_user.username }}</h1>  # Displays the username of the currently logged-in user
+{% endblock content %}  # Ends the content block

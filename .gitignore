@@ -1,0 +1,7 @@
+python -m venv my_env
+pip install flask[full]
+source my_env/Scripts/activat - windows
+source my_env/bin/activate
+# set environment variables
+export FLASK_APP=flaskweb.py
+export FLASK_DEBUG=1

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    {% if title %}
+        <title>SPLM- {{ title }}</title> <!-- Dynamic title based on the value of 'title' -->
+    {% else %}
+        <title>SPLM</title> <!-- Default title -->
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">SPLM</a> <!-- Brand logo or name -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> <!-- Navbar toggle button icon -->
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a> <!-- Link to home page -->
+              <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a> <!-- Link to about page -->
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a> <!-- Link to user account page -->
+                <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a> <!-- Link to logout functionality -->
+              {% else %}
+                <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a> <!-- Link to login page -->
+                <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a> <!-- Link to register page -->
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }} <!-- Display flash messages -->
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          {% block content %}{% endblock %} <!-- Placeholder for content that will be overridden by child templates -->
+        </div>
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>Our Sidebar</h3> <!-- Sidebar heading -->
+            <p class='text-muted'>You can put any information here you'd like. <!-- Sidebar description -->
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Latest Posts</li> <!-- Sidebar item -->
+                <li class="list-group-item list-group-item-light">Announcements</li> <!-- Sidebar item -->
+                <li class="list-group-item list-group-item-light">Calendars</li> <!-- Sidebar item -->
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> <!-- jQuery library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> <!-- Popper.js library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> <!-- Bootstrap JavaScript -->
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "layout.html" %}  <!-- Extends the layout.html template -->
+
+{% block content %}  <!-- Defines a block named 'content' -->
+    <div class="content-section">  <!-- Creates a div with class "content-section" -->
+        <form method="POST" action="">  <!-- Defines a form with POST method -->
+            {{ form.hidden_tag() }}  <!-- Renders a hidden field for the form -->
+            <fieldset class="form-group">  <!-- Creates a fieldset with class "form-group" -->
+                <legend class="border-bottom mb-4">Log In</legend>  <!-- Adds a legend with class "border-bottom mb-4" -->
+                <div class="form-group">  <!-- Creates a div with class "form-group" -->
+                    {{ form.email.label(class="form-control-label") }}  <!-- Renders the label for the email field -->
+                    {% if form.email.errors %}  <!-- Checks if there are errors for the email field -->
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}  <!-- Renders the email field with class "form-control form-control-lg is-invalid" -->
+                        <div class="invalid-feedback">  <!-- Creates a div with class "invalid-feedback" -->
+                            {% for error in form.email.errors %}  <!-- Iterates over the errors for the email field -->
+                                <span>{{ error }}</span>  <!-- Renders each error message -->
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}  <!-- Renders the email field with class "form-control form-control-lg" -->
+                    {% endif %}
+                </div>
+                <div class="form-group">  <!-- Creates a div with class "form-group" -->
+                    {{ form.password.label(class="form-control-label") }}  <!-- Renders the label for the password field -->
+                    {% if form.password.errors %}  <!-- Checks if there are errors for the password field -->
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}  <!-- Renders the password field with class "form-control form-control-lg is-invalid" -->
+                        <div class="invalid-feedback">  <!-- Creates a div with class "invalid-feedback" -->
+                            {% for error in form.password.errors %}  <!-- Iterates over the errors for the password field -->
+                                <span>{{ error }}</span>  <!-- Renders each error message -->
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}  <!-- Renders the password field with class "form-control form-control-lg" -->
+                    {% endif %}
+                </div>
+                <div class="form-check">  <!-- Creates a div with class "form-check" -->
+                    {{ form.remember(class="form-check-input") }}  <!-- Renders the checkbox for the "remember" field -->
+                    {{ form.remember.label(class="form-check-label") }}  <!-- Renders the label for the "remember" field -->
+                </div>
+            </fieldset>
+            <div class="form-group">  <!-- Creates a div with class "form-group" -->
+                {{ form.submit(class="btn btn-outline-info") }}  <!-- Renders the submit button with class "btn btn-outline-info" -->
+            </div>
+            <small class="text-muted ml-2">  <!-- Creates a small element with class "text-muted ml-2" -->
+                <a href="#">Forgot Password?</a>  <!-- Adds a link for password recovery -->
+            </small>
+        </form>
+    </div>
+    <div class="border-top pt-3">  <!-- Creates a div with class "border-top pt-3" -->
+        <small class="text-muted">  <!-- Creates a small element with class "text-muted" -->
+            Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>  <!-- Adds a link for user registration -->
+        </small>
+    </div>
+{% endblock content %}  <!-- Ends the 'content' block -->
